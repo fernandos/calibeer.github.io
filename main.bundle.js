@@ -16,7 +16,7 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <h1>{{title}}</h1>\n        <p>{{subTitle}}</p>\n    </div>\n    \n    <search></search>\n\n\n    <footer class=\"navbar-fixed-bottom text-center\">\n        <div class=\"col-sm-12\">\n            <div class=\"col-sm-4\"></div>\n            <div class=\"col-sm-4\"></div>\n            <p class=\"col-sm-4\">@author: Fernando Següino | Angular4</p>\n        </div>\n    </footer>\n</div>\n"
+module.exports = "<div class=\"container\">\n    <header class=\"row\">\n        <h1>{{title}}</h1>\n        <p>{{subTitle}}</p>\n    </header>\n    \n    <search></search>\n\n    <footer class=\"navbar-fixed-bottom text-center\">\n        <div class=\"col-sm-12\">\n            <div class=\"col-sm-4\"></div>\n            <div class=\"col-sm-4\"></div>\n            <p class=\"col-sm-4\">@author: Fernando Següino | Angular4</p>\n        </div>\n    </footer>\n</div>\n"
 
 /***/ }),
 
@@ -43,6 +43,8 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_app_beer_service__ = __webpack_require__("../../../../../src/app/services/app.beer.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_app_rest_service__ = __webpack_require__("../../../../../src/app/services/app.rest.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -50,11 +52,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
 
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(beerService, restService) {
+        var _this = this;
+        this.beerService = beerService;
+        this.restService = restService;
         this.title = 'Californian Beers';
         this.subTitle = 'Let\'s talk about beers California!';
+        restService.getBeers().subscribe(function (beerList) {
+            _this.beerService.setBeerList(beerList);
+        });
     }
     return AppComponent;
 }());
@@ -63,9 +76,11 @@ AppComponent = __decorate([
         selector: 'app-root',
         template: __webpack_require__("../../../../../src/app/app.component.html"),
         styles: [__webpack_require__("../../../../../src/app/app.component.scss")]
-    })
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_app_beer_service__["a" /* BeerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_app_beer_service__["a" /* BeerService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_app_rest_service__["a" /* RestService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_app_rest_service__["a" /* RestService */]) === "function" && _b || Object])
 ], AppComponent);
 
+var _a, _b;
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
@@ -80,8 +95,10 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__search_app_search_component__ = __webpack_require__("../../../../../src/app/search/app.search.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__beer_app_beer_component__ = __webpack_require__("../../../../../src/app/beer/app.beer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__bubble_app_bubble_component__ = __webpack_require__("../../../../../src/app/bubble/app.bubble.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__beer_list_app_beer_list_component__ = __webpack_require__("../../../../../src/app/beer-list/app.beer-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_app_beer_service__ = __webpack_require__("../../../../../src/app/services/app.beer.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_app_rest_service__ = __webpack_require__("../../../../../src/app/services/app.rest.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__bubble_app_bubble_component__ = __webpack_require__("../../../../../src/app/bubble/app.bubble.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -89,6 +106,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -107,15 +126,18 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_5__search_app_search_component__["a" /* SearchComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__beer_app_beer_component__["a" /* BeerListComponent */],
-            __WEBPACK_IMPORTED_MODULE_7__bubble_app_bubble_component__["a" /* BubblesComponent */]
+            __WEBPACK_IMPORTED_MODULE_6__beer_list_app_beer_list_component__["a" /* BeerListComponent */],
+            __WEBPACK_IMPORTED_MODULE_9__bubble_app_bubble_component__["a" /* BubblesComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */]
         ],
-        providers: [],
+        providers: [
+            __WEBPACK_IMPORTED_MODULE_7__services_app_beer_service__["a" /* BeerService */],
+            __WEBPACK_IMPORTED_MODULE_8__services_app_rest_service__["a" /* RestService */]
+        ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -124,14 +146,14 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/beer/app.beer.component.html":
+/***/ "../../../../../src/app/beer-list/app.beer-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let beerElem of beerList\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-4 col-lg-12\">\r\n            <div class=\"panel panel-default panel-profile\">\r\n                <bubbles></bubbles>\r\n                <div class=\"panel-body\">  \r\n                    <div class=\"chopp-img\"></div>\r\n                    <dl class=\"dl-horizontal\">\r\n                        <dt>Name</dt>\r\n                        <dd>{{beerElem.Name}}</dd>\r\n                        <dt>ABV</dt>\r\n                        <dd>{{beerElem.Abv == \"?\"? \"-\" : beerElem.Abv}}</dd>\r\n                        <dt>Brewery</dt>\r\n                        <dd>{{beerElem.Brewery}}</dd>\r\n                        <dt>City</dt>\r\n                        <dd>{{beerElem.City}}</dd>\r\n                        <dt>Tags</dt>\r\n                        <dd *ngFor=\"let tag of beerElem.TagList\">\r\n                            <a>{{tag.name}} ({{tag.count}}) beers of this kind</a>\r\n                        </dd>\r\n                    </dl>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n  \r\n"
+module.exports = "<div *ngFor=\"let beerElem of beerList\">\n    <div class=\"row\">\n        <div class=\"col-md-4 col-lg-12\">\n            <div class=\"panel panel-default panel-profile\">\n                <beer-bubbles></beer-bubbles>\n                <div class=\"panel-body\">  \n                    <div class=\"chopp-img\"></div>\n                    <dl class=\"dl-horizontal\">\n                        <dt>Name</dt>\n                        <dd>{{beerElem.name}}</dd>\n                        <dt>ABV</dt>\n                        <dd>{{beerElem.abv == \"?\"? \"-\" : beerElem.abv}}</dd>\n                        <dt>Brewery</dt>\n                        <dd>{{beerElem.brewery}}</dd>\n                        <dt>City</dt>\n                        <dd>{{beerElem.city}}</dd>\n                        <dt>Tags</dt>\n                        <dd *ngFor=\"let tag of beerElem.tagList\">\n                            <a>{{tag.name}} ({{tag.count}} like this)</a>\n                        </dd>\n                    </dl>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n  \n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/beer/app.beer.component.scss":
+/***/ "../../../../../src/app/beer-list/app.beer-list.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -149,7 +171,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/beer/app.beer.component.ts":
+/***/ "../../../../../src/app/beer-list/app.beer-list.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -178,20 +200,20 @@ __decorate([
 BeerListComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_4" /* Component */])({
         selector: 'beer-list',
-        template: __webpack_require__("../../../../../src/app/beer/app.beer.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/beer/app.beer.component.scss")]
+        template: __webpack_require__("../../../../../src/app/beer-list/app.beer-list.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/beer-list/app.beer-list.component.scss")]
     }),
     __metadata("design:paramtypes", [])
 ], BeerListComponent);
 
-//# sourceMappingURL=app.beer.component.js.map
+//# sourceMappingURL=app.beer-list.component.js.map
 
 /***/ }),
 
 /***/ "../../../../../src/app/bubble/app.bubble.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"container\">\r\n    <div id=\"liquid\">\r\n        <div class=\"bubble bubble1\"></div>\r\n        <div class=\"bubble bubble2\"></div>\r\n        <div class=\"bubble bubble3\"></div>\r\n        <div class=\"bubble bubble4\"></div>\r\n        <div class=\"bubble bubble5\"></div>\r\n    </div>\r\n</div>"
+module.exports = "    <div id=\"liquid\">\r\n        <div class=\"bubble bubble1\"></div>\r\n        <div class=\"bubble bubble2\"></div>\r\n        <div class=\"bubble bubble3\"></div>\r\n        <div class=\"bubble bubble4\"></div>\r\n        <div class=\"bubble bubble5\"></div>\r\n    </div>"
 
 /***/ }),
 
@@ -203,7 +225,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#container {\n  height: 100px;\n  margin: 0 auto;\n  overflow: hidden;\n  position: relative;\n  border-radius: 4px; }\n\n#container div {\n  position: absolute; }\n\n#liquid {\n  background-color: #f2c025;\n  bottom: 0;\n  height: 170px;\n  overflow: hidden;\n  width: 2500px; }\n\n#liquid .bubble {\n  -webkit-animation-name: bubble;\n  -webkit-animation-iteration-count: 10;\n  -webkit-animation-timing-function: linear;\n  background-color: rgba(255, 255, 255, 0.2);\n  bottom: -20px;\n  border-radius: 10px;\n  height: 20px;\n  width: 20px; }\n\n@-webkit-keyframes bubble {\n  0% {\n    bottom: 0; }\n  50% {\n    background-color: rgba(255, 255, 255, 0.2);\n    bottom: 80px; }\n  100% {\n    background-color: rgba(255, 255, 255, 0);\n    bottom: 160px; } }\n\n.bubble1 {\n  left: 5%;\n  -webkit-animation-delay: 700ms;\n  -webkit-animation-duration: 1100ms; }\n\n.bubble2 {\n  left: 13%;\n  -webkit-animation-delay: 1100ms;\n  -webkit-animation-duration: 700ms; }\n\n.bubble3 {\n  left: 22%;\n  -webkit-animation-delay: 700ms;\n  -webkit-animation-duration: 1300ms; }\n\n.bubble4 {\n  left: 30%;\n  -webkit-animation-delay: 1700ms;\n  -webkit-animation-duration: 800ms; }\n\n.bubble5 {\n  left: 43%;\n  -webkit-animation-delay: 200ms;\n  -webkit-animation-duration: 1800ms; }\n", ""]);
+exports.push([module.i, "#liquid {\n  background-color: rgba(242, 192, 37, 0.8);\n  bottom: 0;\n  overflow: hidden;\n  height: 100%; }\n  #liquid .bubble {\n    -webkit-animation-name: bubble;\n    -webkit-animation-iteration-count: infinite;\n    -webkit-animation-timing-function: linear;\n    background-color: rgba(255, 255, 255, 0.2);\n    bottom: -20px;\n    border-radius: 10px;\n    height: 20px;\n    width: 20px;\n    position: relative; }\n\n@-webkit-keyframes bubble {\n  0% {\n    bottom: 0; }\n  50% {\n    background-color: rgba(255, 255, 255, 0.2);\n    bottom: 80px; }\n  100% {\n    background-color: rgba(255, 255, 255, 0);\n    bottom: 160px; } }\n\n.bubble1 {\n  left: 5%;\n  -webkit-animation-delay: 700ms;\n  -webkit-animation-duration: 1100ms; }\n\n.bubble2 {\n  left: 13%;\n  -webkit-animation-delay: 1100ms;\n  -webkit-animation-duration: 700ms; }\n\n.bubble3 {\n  left: 22%;\n  -webkit-animation-delay: 700ms;\n  -webkit-animation-duration: 1300ms; }\n\n.bubble4 {\n  left: 30%;\n  -webkit-animation-delay: 1700ms;\n  -webkit-animation-duration: 800ms; }\n\n.bubble5 {\n  left: 43%;\n  -webkit-animation-delay: 200ms;\n  -webkit-animation-duration: 1800ms; }\n", ""]);
 
 // exports
 
@@ -233,7 +255,7 @@ var BubblesComponent = (function () {
 }());
 BubblesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_4" /* Component */])({
-        selector: 'bubbles',
+        selector: 'beer-bubbles',
         template: __webpack_require__("../../../../../src/app/bubble/app.bubble.component.html"),
         styles: [__webpack_require__("../../../../../src/app/bubble/app.bubble.component.scss")]
     })
@@ -246,7 +268,7 @@ BubblesComponent = __decorate([
 /***/ "../../../../../src/app/search/app.search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <form class=\"row\">\r\n    <div class=\"col-md-4\"></div>\r\n    <div class=\"col-md-4\">\r\n      <div class=\"form-group\">\r\n        <input type=\"text\" id=\"search-str\" name=\"searchStr\" [(ngModel)]=\"searchStr\" (keyup)=\"search()\" class=\"form-control\" placeholder=\"Search for beer\" autocomplete=\"off\">\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-4\"></div>\r\n  </form>\r\n\r\n  <div *ngIf=\"loading; else content\" class=\"row\">\r\n    <div id=\"loading\">\r\n      <bubbles></bubbles>\r\n    </div>\r\n  </div>\r\n\r\n  <ng-template #content>\r\n    <beer-list [beerList]=\"currentBeerList\"></beer-list>\r\n  </ng-template>\r\n</div>"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <form>\r\n      <div class=\"col-md-4\"></div>\r\n      <div class=\"col-md-4\">\r\n        <div class=\"form-group\">\r\n          <input type=\"text\" id=\"search-str\" name=\"searchStr\" [(ngModel)]=\"searchStr\" (keyup)=\"search()\" class=\"form-control\" placeholder=\"Search for beer\" autocomplete=\"off\">\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-4\"></div>\r\n    </form>\r\n  </div>\r\n  <div *ngIf=\"loading; else content\" class=\"row\">\r\n    <div id=\"loading\">\r\n      <beer-bubbles></beer-bubbles>\r\n    </div>\r\n  </div>\r\n\r\n  <ng-template #content>\r\n    <beer-list [beerList]=\"currentSearchBeerList\"></beer-list>\r\n  </ng-template>\r\n</div>"
 
 /***/ }),
 
@@ -258,7 +280,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#search-str {\n  height: 45px;\n  font-size: 18px; }\n\n/******************/\n#loading {\n  height: 100px;\n  margin: 0 auto;\n  overflow: hidden;\n  position: relative; }\n\n#loading div {\n  position: fixed;\n  z-index: -1; }\n\n#liquid {\n  background-color: #f2c025;\n  bottom: 0;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  left: 0;\n  opacity: 0.9; }\n\n#liquid .bubble {\n  -webkit-animation-name: bubble;\n  -webkit-animation-iteration-count: infinite;\n  -webkit-animation-timing-function: linear;\n  background-color: rgba(255, 255, 255, 0.2);\n  bottom: 0;\n  border-radius: 10px;\n  height: 20px;\n  width: 20px; }\n\n@-webkit-keyframes bubble {\n  0% {\n    bottom: 0; }\n  50% {\n    background-color: rgba(255, 255, 255, 0.2);\n    bottom: 80px; }\n  100% {\n    background-color: rgba(255, 255, 255, 0);\n    bottom: 160px; } }\n\n.bubble1 {\n  left: 1%;\n  -webkit-animation-delay: 100ms;\n  -webkit-animation-duration: 1100ms; }\n\n.bubble2 {\n  left: 5%;\n  -webkit-animation-delay: 700ms;\n  -webkit-animation-duration: 1100ms; }\n\n.bubble3 {\n  left: 10%;\n  -webkit-animation-delay: 1200ms;\n  -webkit-animation-duration: 1300ms; }\n\n.bubble4 {\n  left: 13%;\n  -webkit-animation-delay: 1100ms;\n  -webkit-animation-duration: 700ms; }\n\n.bubble5 {\n  left: 17%;\n  -webkit-animation-delay: 1300ms;\n  -webkit-animation-duration: 800ms; }\n\n.bubble6 {\n  left: 22%;\n  -webkit-animation-delay: 700ms;\n  -webkit-animation-duration: 1300ms; }\n\n.bubble7 {\n  left: 25%;\n  -webkit-animation-delay: 700ms;\n  -webkit-animation-duration: 800ms; }\n\n.bubble8 {\n  left: 30%;\n  -webkit-animation-delay: 1700ms;\n  -webkit-animation-duration: 800ms; }\n\n.bubble9 {\n  left: 35%;\n  -webkit-animation-delay: 700ms;\n  -webkit-animation-duration: 1300ms; }\n\n.bubble10 {\n  left: 43%;\n  -webkit-animation-delay: 200ms;\n  -webkit-animation-duration: 1800ms; }\n", ""]);
+exports.push([module.i, "#search-str {\n  height: 45px;\n  font-size: 18px; }\n\n/******************/\n#loading {\n  overflow: hidden;\n  top: 0;\n  left: 0;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: -1; }\n", ""]);
 
 // exports
 
@@ -274,8 +296,6 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_app_beer_service__ = __webpack_require__("../../../../../src/app/services/app.beer.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -288,79 +308,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var SearchComponent = (function () {
     function SearchComponent(_beerService) {
         this._beerService = _beerService;
-        this.allBeerByTag = [];
-        this.beersByTagCount = [];
         this.loading = false;
     }
-    SearchComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._beerService.getBeers()
-            .subscribe(function (beerResult) { return _this.initilize(beerResult); });
-    };
-    SearchComponent.prototype.initilize = function (beerResult) {
-        var _this = this;
-        this.allBeers = beerResult;
-        this.allBeerByTag = this.generateBeerByTagList(beerResult);
-        this.beersByTagCount = __WEBPACK_IMPORTED_MODULE_2_lodash__["keys"](this.allBeerByTag)
-            .map(function (k) {
-            return { name: k, count: _this.allBeerByTag[k].length };
-        });
-    };
-    SearchComponent.prototype.generateBeerByTagList = function (beers) {
-        var _this = this;
-        beers.forEach(function (beer) {
-            // generates a array of tagas
-            var currentBeerTags = beer.Tags.split('|');
-            _this.addBeerToTagList(_this.allBeerByTag, beer, currentBeerTags);
-        });
-        return this.allBeerByTag;
-    };
-    SearchComponent.prototype.addBeerToTagList = function (allBeerByTag, beer, beerTags) {
-        beerTags.forEach(function (tag) {
-            // if the tag doesn't exist => it's added
-            if (allBeerByTag[tag] == undefined) {
-                allBeerByTag[tag] = [beer]; // creates a new beer's array for current tag
-            }
-            else {
-                allBeerByTag[tag].push(beer); // beer's array exist => just push 
-            }
-        });
-    };
+    /**
+     * Action linked to user typing
+     */
     SearchComponent.prototype.search = function () {
-        this.loading = true;
-        this.filterByName(this.searchStr);
-    };
-    SearchComponent.prototype.filterByName = function (name) {
         var _this = this;
-        this.currentBeerList = this.allBeers
-            .filter(function (beer) {
-            if (beer.Name && beer.Name.toLocaleLowerCase().startsWith(name)) {
-                var currentTags = beer.Tags.split("|");
-                beer.TagList = _this.generateTagList(currentTags);
-                return beer;
-            }
-        });
+        this.loading = true;
+        this.currentSearchBeerList = this._beerService.getBeerByName(this.searchStr);
         // just to simulate a loading
         setTimeout(function () { _this.loading = false; }, 1000);
-    };
-    SearchComponent.prototype.generateTagList = function (tagList) {
-        var _this = this;
-        return tagList.map(function (tagName) {
-            var beerByTag = _this.allBeerByTag[tagName];
-            tagName = tagName.split("_").join(" ");
-            var cleanName = tagName.charAt(0).toUpperCase() + tagName.slice(1);
-            return { name: cleanName, count: beerByTag.length };
-        });
-    };
-    SearchComponent.prototype.filterByTag = function (tag) {
-        this.currentBeerList = this.allBeers
-            .filter(function (list) {
-            return list.Tags && list.Tags.toLocaleLowerCase().startsWith(tag);
-        });
     };
     return SearchComponent;
 }());
@@ -368,8 +329,7 @@ SearchComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_4" /* Component */])({
         selector: 'search',
         template: __webpack_require__("../../../../../src/app/search/app.search.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/search/app.search.component.scss")],
-        providers: [__WEBPACK_IMPORTED_MODULE_1__services_app_beer_service__["a" /* BeerService */]]
+        styles: [__webpack_require__("../../../../../src/app/search/app.search.component.scss")]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_app_beer_service__["a" /* BeerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_app_beer_service__["a" /* BeerService */]) === "function" && _a || Object])
 ], SearchComponent);
@@ -384,10 +344,101 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BeerService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var BeerService = (function () {
+    function BeerService() {
+        this.beerList = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__["BehaviorSubject"]([]);
+    }
+    /**
+     * Given a new list of beer set the main list
+     */
+    BeerService.prototype.setBeerList = function (newBeerList) {
+        var listWithLowerKey = this.beerResultToLowercase(newBeerList);
+        this.beerList.next(listWithLowerKey);
+    };
+    /**
+     * Returns the current list of beers
+     */
+    BeerService.prototype.getBeerList = function () {
+        return this.beerList;
+    };
+    /**
+     * Given a string returns a list with matching beers
+     * @param {string} name
+     */
+    BeerService.prototype.getBeerByName = function (name) {
+        var _this = this;
+        var result = [];
+        result = this.beerList.value.filter(function (beer) {
+            if (beer.name && name && beer.name.toLowerCase().startsWith(name.toLowerCase())) {
+                var currentTags = beer.tags.split('|');
+                beer.tagList = _this.generateMapTagCount(currentTags);
+                return beer;
+            }
+        });
+        return result;
+    };
+    /**
+     * Given an array of strings containing tag's beers return a list of tuplas:
+     * [ { name: 'american pale ale', count: 123 } ]
+     * @param {tagList} Array
+     * @returns {Array}
+     */
+    BeerService.prototype.generateMapTagCount = function (tagList) {
+        var _this = this;
+        return tagList.map(function (tagName) {
+            var beerByTag = __WEBPACK_IMPORTED_MODULE_2_lodash__["filter"](_this.beerList.value, function (beer) {
+                var currentBeerTags = beer.tags.split('|');
+                return currentBeerTags[0] === tagName || currentBeerTags[1] === tagName;
+            });
+            tagName = tagName.split('_').join(' ');
+            var cleanName = tagName.charAt(0).toUpperCase() + tagName.slice(1);
+            return { name: cleanName, count: beerByTag.length };
+        });
+    };
+    /**
+     * Given a list of Beer objects, convert all the object's keys to lowercase
+     * @param {Array<Beer>} beerResult List of beer objects.
+     */
+    BeerService.prototype.beerResultToLowercase = function (beerResult) {
+        return beerResult.map(function (obj) {
+            return __WEBPACK_IMPORTED_MODULE_2_lodash__["mapKeys"](obj, function (v, k) {
+                return k.toLowerCase();
+            });
+        });
+    };
+    return BeerService;
+}());
+BeerService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])()
+], BeerService);
+
+//# sourceMappingURL=app.beer.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/app.rest.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RestService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -400,24 +451,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var BeerService = (function () {
-    function BeerService(_http) {
+var RestService = (function () {
+    function RestService(_http) {
         this._http = _http;
         this.searchUrl = 'https://vdms-ui.herokuapp.com/api/beers';
     }
-    BeerService.prototype.getBeers = function () {
+    RestService.prototype.getBeers = function () {
+        var _this = this;
         return this._http.get(this.searchUrl)
-            .map(function (res) { return res.json(); });
+            .map(function (res) {
+            var json = res.json();
+            if (res.ok) {
+                return json;
+            }
+            else {
+                return _this.logError(json);
+            }
+        });
     };
-    return BeerService;
+    RestService.prototype.logError = function (error) {
+        console.error(error.error);
+        throw error;
+    };
+    return RestService;
 }());
-BeerService = __decorate([
+RestService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
-], BeerService);
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _a || Object])
+], RestService);
 
 var _a;
-//# sourceMappingURL=app.beer.service.js.map
+//# sourceMappingURL=app.rest.service.js.map
 
 /***/ }),
 
